@@ -1,0 +1,12 @@
+cat > .gitignore << 'EOF'
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+.vscode/
+EOF
+hello
+demo
+shapes_test
