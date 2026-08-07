@@ -1,0 +1,73 @@
+# Инвентарь железа для курса C/C++ embedded
+# Обновляется по ходу прохождения модулей
+
+components:
+  - name: STM32 Blue Pill
+    category: board
+    model: STM32F103C8T6
+    status: in_stock
+    voltage: 3.3V
+    flash: 64KB
+    ram: 20KB
+    interfaces: [UART, SPI, I2C, USB]
+    onboard:
+      - LED on PC13
+      - 8MHz crystal (Y2)
+      - 32.768kHz crystal (RTC)
+      - BOOT0/BOOT1 jumper
+      - Reset button
+    notes: "возможно клон (маркировка CHN GD на чипе), нужен ST-Link для прошивки через SWD"
+    datasheet_url: TODO
+
+  - name: ESP32-WROOM-32
+    category: board
+    status: in_stock
+    voltage: 3.3V
+    interfaces: [UART, SPI, I2C, WiFi, BLE]
+    notes: ""
+
+  - name: Hall Sensor
+    category: sensor
+    model: SS49E
+    package: TO-92
+    status: in_stock
+    output_type: analog (linear)
+    voltage_range: 2.7V - 6.5V
+    notes: "требует ADC-пин на ESP32, не цифровой GPIO"
+
+  - name: Stepper Motor
+    category: actuator
+    model: 42SHDC3030Z-23WB-1
+    status: in_stock
+    type: NEMA17, bipolar (used as 4-wire)
+    notes: "6-pin connector, pins 2 and 5 unused"
+
+  - name: Stepper Driver
+    category: driver
+    model: ATD5833 Stepstick
+    status: in_stock
+    notes: "Voltage range from 5V to 36V DC . Maximum output current up to 2.5A . Supports 3.3V and 5V logic . Heatsink included."
+
+  - name: ST-Link Programmer
+    category: tool
+    model: ST-LINK/V2
+    status: in_stock
+    notes: "оригинал ST, в комплекте USB-кабель и шлейф-переходник (20-pin)"
+
+  - name: Soldering Station
+    category: tool
+    status: in_stock
+
+  - name: Multimeter
+    category: tool
+    status: in_stock
+
+  - name: Lab Power Supply
+    category: tool
+    status: in_stock
+    specs: "up to 30V / 10A"
+
+  - name: 3D Printer
+    category: tool
+    model: Anycubic Kobra S1 Combo
+    status: in_stock
