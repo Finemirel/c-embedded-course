@@ -17,7 +17,7 @@ components:
       - BOOT0/BOOT1 jumper
       - Reset button
     notes: "возможно клон (маркировка CHN GD на чипе), нужен ST-Link для прошивки через SWD"
-    datasheet_url: TODO
+    datasheet_url: https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill
 
   - name: ESP32-WROOM-32
     category: board
