@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
 
 int main(void) {
-  /* Функция, которая находит первое простое число больше заданного N 
-  (перебор + continue для отсечения делителей, 
-  break когда простое найдено). */
-  
+
   int min = 0;
   int max = 100;
   int size_first_array;
@@ -33,24 +32,24 @@ int main(void) {
   if(number_array == 0) {
     printf("Number in array not found!\n");
   }
-  
+ 
   /* Двойной цикл 5×5, эмулирующий сканирование матрицы датчиков 
   (int matrix[5][5] с случайными числами 0-100). 
   Найти первую ячейку со значением > 90 и 
   выйти из обоих циклов сразу — реализовать через goto 
   (правильный, «вперёд», паттерн). */
+ 
   int minM = 0;
   int maxM = 100;
   int lineM = 5;
   int columnM = 5;
   int first_matrix[lineM][columnM];
   
-  not_find:
-    for(int i = 0; i < lineM; i++) {
-      for(int j = 0; j < columnM; j++) {
-        first_matrix[i][j] = minM + arc4random_uniform(maxM - minM + 1);
-      }
+  for(int i = 0; i < lineM; i++) {
+    for(int j = 0; j < columnM; j++) {
+      first_matrix[i][j] = minM + arc4random_uniform(maxM - minM + 1);
     }
+  }
   
   int find_number = 0;
   for(int i = 0; i < lineM; i++) {
@@ -62,26 +61,54 @@ int main(void) {
       }
     }
   }
-  
+ 
   printf("No values greater than 90 were found in the matrix.\n");
-  printf("Shell we try again? 1 - yes 0 - no\n");
-  int x;
-  int result = scanf("%d", &x);
-  if (result != 1) {
-    goto ended;
-  }
-  if(find_number == 0) goto not_find;
   
   ended:
-    if(find_number == 0) {
-      printf("Bye");
-    } else {
-      printf("Find number in matrix: %d\n", find_number);
-    }
+    printf("Find number in matrix: %d\n", find_number);
   
+    /* Функция, которая находит первое простое число больше заданного N 
+  (перебор + continue для отсечения делителей, 
+  break когда простое найдено). */
+  
+  int your_number;
+  printf("Enter your number: ");
+  scanf("%d", &your_number);
+  if(your_number < 1) {
+    your_number = 1;
+  }
+  your_number = your_number + 1;
+  bool divider = true;
+  while(divider) {
+    int x = (int)sqrt((double)your_number);
+    int fin = 1;
+    for(int i = 2; i <= x; i++) {
+      if(your_number%i == 0) {
+        your_number = your_number + 1;
+        fin = 0;
+      }
+      if(fin == 0) break;
+    }
+    if(fin != 0) {
+      printf("Your simple number = %d!\n", your_number);
+      divider = false;
+    }
+    
+  }
+   
   /* do-while меню в консоли: выводит пункты 
   1) сканировать 2) выход, 
   крутится пока пользователь не введёт 2. */
+  
+  
+  int number_two;
+  do {
+    printf("choose punkt menu:\n  1 - scan\n  2 - exit\n");
+    scanf("%d", &number_two);
+    if(number_two != 1 && number_two != 2) {
+      printf("Punkt menu is not found! Try again.\n");
+    }
+  } while(number_two != 2);
   
   
   return 0;
