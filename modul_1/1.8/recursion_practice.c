@@ -5,9 +5,9 @@ int fib(int n);
 void infinite_recursion(int depth);
 
 int main(void) {
-  //count_down(5);
-  //printf("%d\n", fib(10));
-  infinite_recursion(0);
+  count_down(5);
+  printf("%d\n", fib(10));
+  //infinite_recursion(0);
   return 0;
 }
 
