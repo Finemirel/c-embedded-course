@@ -20,7 +20,7 @@ int main(void) {
   
   print_matrix(MATRIX_ROW, MATRIX_COLUMN, matrix);
   
-  int (*p)[4] = matrix;
+  int (*p)[MATRIX_COLUMN] = matrix;
   printf("%d\n", p[1][2]);
   
   int summ = sum_matrix(MATRIX_ROW, MATRIX_COLUMN, matrix);
