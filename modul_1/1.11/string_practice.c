@@ -56,11 +56,6 @@ int main(void) {
     printf("Your name %s and your username %s is diffrent!\n", name, user_name);
   }
   
-  char buf[5];
-  strcpy(buf, "Hello World"); // строка длиннее 5 байт — переполнение буфера, UB
-  printf("%s\n", buf);
-  
-  
   return 0;
 }
 
