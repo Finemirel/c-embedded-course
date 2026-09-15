@@ -1,10 +1,9 @@
-cat > .gitignore << 'EOF'
 *.o
 *.obj
 *.out
 *.exe
 *.a
 *.so
-.vscode/
-EOF
+.vscode/*
 app
+!.vscode/launch.json
