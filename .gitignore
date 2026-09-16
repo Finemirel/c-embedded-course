@@ -6,4 +6,5 @@
 *.so
 .vscode/*
 app
+app2
 !.vscode/launch.json
