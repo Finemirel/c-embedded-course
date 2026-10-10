@@ -4,8 +4,19 @@
 #include <stddef.h>
 #include <time.h>
 #include <signal.h>
+#include <stdint.h>
 
+#define UART_TIMEOUT 1000000u
 static const int global_forbidden = 7;
+#define TXE (1u << 7)
+
+typedef struct {
+  const volatile uint32_t SR;
+  volatile uint32_t DR;
+} UartRegs;
+
+int uart_send_byte_my(UartRegs *u, uint8_t b);
+int uart_send_byte(UartRegs *u, uint8_t b);
 
 void break_const(const int *p);
 long delay_plain(long n);      // цикл с обычной переменной
@@ -179,7 +190,14 @@ int main(int argc, char *argv[]) {
     }
     case 6: {
       printf("Part %ld\n", part);
-
+      UartRegs ready = {TXE, 0};
+      UartRegs broken = {0, 0};
+      int res_ready = uart_send_byte(&ready, 8);
+      printf("uart_send_byte with ready return %d\n", res_ready);
+      printf("Value DR = %u\n", ready.DR);
+      int res_broken = uart_send_byte(&broken, 16);
+      printf("uart_send_byte with broken return %d\n", res_broken);
+      printf("Value DR = %u\n", broken.DR);
       break;
     }
     default: {
@@ -207,4 +225,27 @@ long delay_volatile(long n) {
   volatile long i;
   for(i = 0; i < n; i++) { }
   return i;
+}
+
+int uart_send_byte_my(UartRegs *u, uint8_t b) {
+  int temp = 0;
+  while((u->SR & TXE) == 0) {
+    temp++;
+    if(temp == UART_TIMEOUT) {
+      return -1;
+    }
+  }
+  //u->SR = 0;  assignment of read-only member ‘SR’
+  u->DR = b;
+  return 0;
+}
+
+int uart_send_byte(UartRegs *u, uint8_t b) {
+  for (uint32_t i = 0; i < UART_TIMEOUT; i++) {
+    if (u->SR & TXE) {
+      u->DR = b;
+      return 0;
+    }
+  }
+  return -1;
 }
